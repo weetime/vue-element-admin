@@ -383,6 +383,33 @@ export const asyncRoutes = [
     ]
   },
 
+  {
+    path: '/rabbitmq',
+    component: Layout,
+    redirect: '/rabbitmq/list-messages',
+    alwaysShow: true,
+    name: 'Rabbitmq',
+    meta: {
+      title: 'rabbitmq',
+      icon: 'lock',
+      roles: ['admin', 'editor']
+    },
+    children: [
+      {
+        path: 'list-messages',
+        component: () => import('@/views/rabbitmq/list-messages'),
+        name: 'ListMessages',
+        meta: { title: '待分发消息', icon: 'list' }
+      },
+      {
+        path: 'republish',
+        component: () => import('@/views/rabbitmq/republish'),
+        name: 'Republish',
+        meta: { title: '补偿消息', icon: 'nested' }
+      }
+    ]
+  },
+
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
